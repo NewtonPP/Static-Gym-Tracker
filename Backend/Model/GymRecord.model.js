@@ -1,0 +1,17 @@
+import mongoose, { Schema, mongo } from "mongoose"
+
+const GymRecordSchema = mongoose.Schema({
+    User:{
+        type:mongoose.Schema.Types.ObjectId, ref:"User"
+    },
+    Date:{
+        type:Date, default:Date()
+    },
+    Exercises:[{
+        name:String,
+        sets:Number,
+        reps:Number,    
+    }]
+})
+
+export const WorkoutModel = mongoose.model("GymRecord",GymRecordSchema)
