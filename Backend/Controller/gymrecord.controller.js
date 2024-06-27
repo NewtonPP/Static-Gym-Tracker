@@ -5,6 +5,9 @@ import { WorkoutModel } from "../Model/GymRecord.model.js";
 export const AddWorkout=async(req,res)=>{
     try {
         const WorkoutInfo = req.body
+        if(!WorkoutInfo.User){
+            return res.status(400).json({message:"Not a valid user"})
+        }
        const newWorkout = await WorkoutModel.create(WorkoutInfo)
         res.status(200).json(newWorkout)
     } catch (error) {

@@ -2,7 +2,12 @@ import { UserModel } from "../Model/User.Model.js";
 import bcrypt from "bcryptjs"
 export const Signup = async(req,res)=>{
     try {
-        const {FullName,Email,Contact,Password,ConfirmPassword,Weight,Height,Gender,DateOfBirth} = req.body
+        const {FullName,Email,Contact,Password,ConfirmPassword,Weight,Height,Gender,DateOfBirth,UserType} = req.body
+        if(!FullName || !Email || !Contact || !DateOfBirth || !Gender || !Height ||!Weight
+            || !Password || !ConfirmPassword
+        ){
+            return res.status(400).json({message:"You need to enter all the credentials"})
+        }
         const ifUser = await UserModel.findOne({Email})
         if(ifUser){
             return res.status(400).json({message:"This User already exists"})
@@ -34,7 +39,8 @@ export const Signup = async(req,res)=>{
             Height,
             Gender,
             DateOfBirth,
-            Age
+            Age,
+            UserType
         })
         if(newUser){
             newUser.save();

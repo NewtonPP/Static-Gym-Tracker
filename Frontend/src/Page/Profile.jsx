@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Loading from "../Components/Loading";
 
 const Profile = () => {
+  const [isLoading, setisLoading] = useState(false)
   const location = useLocation();
   const [profileData, setProfileData] = useState(null);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
@@ -15,16 +17,16 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    setisLoading(true)
     const fetchProfileData = () => {
-      axios
-        .get(`http://localhost:3000/api/user/profile${pathname}`, {
+      axios.get(`http://localhost:3000/api/user/profile${pathname}`, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((response) => {
-          console.log(response.data);
           setProfileData(response.data);
+          setisLoading(false)
         });
     };
     fetchProfileData();
@@ -33,6 +35,8 @@ const Profile = () => {
   return (
     <>
       <Header />
+      {
+        isLoading ? <Loading/> :
       <div className="ProfilePage h-full w-full bg-[#F0F7F4] flex flex-col items-center">
         {!isProfileClicked && profileData && (
           <div className="ProfileContent h-full w-full bg-white p-8 shadow-lg rounded-lg flex flex-col items-center justify-center animate-slideIn">
@@ -85,6 +89,7 @@ const Profile = () => {
           </div>
         )}
       </div>
+}
     </>
   );
 };

@@ -3,6 +3,9 @@ import { MealModel } from "../Model/Calorie.model.js";
 export const AddMealData =async(req,res)=>{
     try {
         const MealData = req.body;
+        if(!MealData.User){
+            return res.status(400).json({message:"Not a valid user"})
+        }
         const newMealData = await MealModel.create(MealData)
         return res.status(200).json(newMealData)
     } catch (error) {

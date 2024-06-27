@@ -2,7 +2,8 @@ import mongoose, { Schema, mongo } from "mongoose"
 
 const GymRecordSchema = mongoose.Schema({
     User:{
-        type:mongoose.Schema.Types.ObjectId, ref:"User"
+        type:mongoose.Schema.Types.ObjectId, ref:"User",
+        required:true
     },
     Date:{
         type:Date, default:Date()

@@ -1,12 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import { useState } from 'react';
+import { useAuthContext } from '../Context/AuthContext';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import Loading from '../Components/Loading';
 
 const SignUp = () => {
+  const [isLoading, setisLoading] = useState(false) 
+  const {authUser, setAuthUser} = useAuthContext();
   const [DateOfBirth, setDateOfBirth] = useState(new Date());
+  const [ErrorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
 
   const [signupData, setSignupData] = useState({
@@ -27,7 +32,7 @@ const SignUp = () => {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-
+    setisLoading(true)
     axios.post("http://localhost:3000/api/user/signup", signupData, {
       headers: {
         "Content-Type": "application/json"
@@ -36,8 +41,11 @@ const SignUp = () => {
     .then((response) => {
       localStorage.setItem("User", JSON.stringify(response.data));
       localStorage.setItem("Id", response.data._id);
-      console.log(response.data);
-    });
+      setAuthUser(response.data)
+      setisLoading(false)
+      navigate(`/profile/${response.data._id}`)
+    })
+    .catch((error)=>{setErrorMessage(error.response.data.message)})
   };
 
   const handleDateChange = (date) => {
@@ -52,6 +60,8 @@ const SignUp = () => {
 
   return (
     <>
+    {
+      isLoading ? <Loading/> :
       <div className="SignUpPage h-[1000px] w-[100%] bg-[#F0F7F4] flex justify-center items-center">
         <form
           className="SignUpContainer h-auto w-[400px] bg-white shadow-lg rounded-lg flex flex-col justify-center items-center p-8"
@@ -186,12 +196,18 @@ const SignUp = () => {
               onChange={handleInputChange}
             />
           </div>
-
+          {
+            ErrorMessage &&
+          <div className="ErrorContainer h-[40px] w-[full] text-red-600">
+            {ErrorMessage}
+          </div>
+          }
           <button className="h-[40px] w-full bg-yellow-500 text-white font-bold py-2 rounded hover:bg-yellow-600 transition duration-300" type="submit">
             Sign Up
           </button>
         </form>
       </div>
+}
     </>
   );
 };

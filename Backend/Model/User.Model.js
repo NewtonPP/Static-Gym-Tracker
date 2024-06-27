@@ -41,9 +41,9 @@ const UserSchema = mongoose.Schema({
     CalorieRecords:[{type:mongoose.Schema.Types.ObjectId,ref:"CalorieRecord"}],
     UserType:{
         type:String,
-        enum:["USER","ADMIN"],
+        required:true,
         default:"USER",
-        required:true
+        enum:["USER","ADMIN"],
     }
 
 })

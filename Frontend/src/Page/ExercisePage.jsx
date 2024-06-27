@@ -3,21 +3,23 @@ import Header from "../Components/Header";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
+import Loading from "../Components/Loading";
 
 const ExercisePage = () => {
   const [Exercises, setExercises] = useState([]);
+  const [isLoading, setisLoading] = useState(false)
   const Navigate = useNavigate()
   useEffect(() => {
     const fetchExercises = () => {
-      axios
-        .get("http://localhost:3000/api/exercises/getexercises", {
+      setisLoading(true)
+      axios.get("http://localhost:3000/api/exercises/getexercises", {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((response) => {
-          console.log(response.data);
           setExercises(response.data);
+          setisLoading(false)
         });
     };
     fetchExercises();
@@ -29,6 +31,8 @@ const ExercisePage = () => {
   return (
     <>
       <Header />
+      {
+        isLoading ? <Loading/> :
       <div className="ExercisePage min-h-screen w-full bg-[#F0F7F4] py-8">
         <div className="Exercises h-16 w-full bg-[#5A5A5A] text-white text-2xl flex justify-center items-center font-semibold">
           Exercises
@@ -58,6 +62,7 @@ const ExercisePage = () => {
           ))}
         </div>
       </div>
+}
     </>
   );
 };
