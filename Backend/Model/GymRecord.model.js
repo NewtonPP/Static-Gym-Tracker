@@ -6,7 +6,7 @@ const GymRecordSchema = mongoose.Schema({
         required:true
     },
     Date:{
-        type:Date, default:Date()
+        type:String
     },
     Exercises:[{
         name:String,

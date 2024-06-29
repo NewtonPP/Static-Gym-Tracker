@@ -28,8 +28,12 @@ const Profile = () => {
           setProfileData(response.data);
           setisLoading(false)
         });
+
+    axios.get("")
     };
     fetchProfileData();
+
+
   }, [pathname]);
 
   return (
@@ -70,8 +74,8 @@ const Profile = () => {
                 <p className="text-lg">{profileData.Height} ft</p>
               </div>
               <div className="ProfileDetail p-4 bg-gray-100 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold">Weight</h2>
-                <p className="text-lg">{profileData.Weight} kg</p>
+                <h2 className="text-xl font-semibold">Goal</h2>
+                <p className="text-lg">{profileData.Goal}</p>
               </div>
               <div className="ProfileDetail p-4 bg-gray-100 rounded-lg shadow-sm">
                 <h2 className="text-xl font-semibold">Gender</h2>

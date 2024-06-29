@@ -63,7 +63,7 @@ const AddDay = () => {
     const WorkoutRecord = {
       User: UserId,
       Name: workoutName,
-      Date: date,
+      Date: date.toLocaleDateString(),
       Exercises: exercises,
       Meals: meals
     };
@@ -85,7 +85,7 @@ const AddDay = () => {
     setisLoading(true);
     const CalorieRecord = {
       User: UserId,
-      Date: date,
+      Date: date.toLocaleDateString(),
       Meals: meals
     };
 

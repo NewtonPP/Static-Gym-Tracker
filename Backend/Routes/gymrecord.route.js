@@ -5,7 +5,7 @@ export const WorkoutRouter = express.Router();
 
 WorkoutRouter.post("/addrecord",AddWorkout)
 WorkoutRouter.get("/getallworkouts",GetAllWorkouts)
-WorkoutRouter.get("/getworkout",GetAWorkout)
+WorkoutRouter.post("/getworkout",GetAWorkout)
 WorkoutRouter.get("/getexercises",GetExercises)
 WorkoutRouter.delete("/deleteworkout",DeleteAWorkout)
 WorkoutRouter.delete("/deleteallworkouts",DeleteAllWorkouts)

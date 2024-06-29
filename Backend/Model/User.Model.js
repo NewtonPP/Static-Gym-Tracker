@@ -18,8 +18,9 @@ const UserSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    Weight:{
-        type:Number
+    Goal:{
+        type:String,
+        required:true
     },
     Height:{
         type:String
@@ -30,7 +31,7 @@ const UserSchema = mongoose.Schema({
         enum:["Male","Female"]
     },
     DateOfBirth:{
-        type:Date,
+        type:String,
         required:true
     },
     Age:{

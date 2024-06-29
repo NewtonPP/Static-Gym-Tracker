@@ -31,12 +31,12 @@ export const GetAllWorkouts = async(req,res)=>{
 export const GetAWorkout = async(req,res)=>{
     try {
         const {Date} = req.body;
-        const FindWorkout = await WorkoutModel.findOne({Date});
+        const FindWorkout = await WorkoutModel.find({Date});
         if(FindWorkout){
-            return res.status(500).json(FindWorkout)
+            return res.status(200).json(FindWorkout)
         }
-        else{
-            throw Error
+        if(!FindWorkout){
+            return res.status(400).json({message:"No workout found for this date"})
         }
     } catch (error) {
         res.status(500).json({error:"Internal Server Error"})

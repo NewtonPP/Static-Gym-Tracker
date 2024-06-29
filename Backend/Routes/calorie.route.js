@@ -5,6 +5,6 @@ export const MealRouter = express.Router();
 
 MealRouter.post("/addcaloriecount",AddMealData)
 MealRouter.get("/getmealdata",getMealData)
-MealRouter.get("/getmeal",getMeal)
+MealRouter.post("/getmeal",getMeal)
 MealRouter.delete("/deletemealdata",DeleteMealData)
 MealRouter.delete("/deleteallmealdata",DeleteAllMealData)

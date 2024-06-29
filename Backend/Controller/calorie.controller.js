@@ -27,7 +27,7 @@ export const getMealData = async(req,res)=>{
 export const getMeal = async (req,res)=>{
     try {
         const {Date} = req.body 
-        const Meal = await MealModel.findOne({Meal})
+        const Meal = await MealModel.find({Date})
         if(Meal){
             res.status(200).json(Meal)
         }

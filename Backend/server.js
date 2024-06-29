@@ -10,6 +10,7 @@ import { WorkoutRouter } from "./Routes/gymrecord.route.js"
 import { MealRouter } from "./Routes/calorie.route.js"
 import { ConnectToDB } from "./Utils/ConnectToDB.js"
 import { ExercisesRouter } from "./Routes/exercises.route.js"
+import { ProgressRoute } from "./Routes/progress.route.js";
 
 dotenv.config();
 // __dirname and __filename are not available in ES modules, so we need to define them.
@@ -25,6 +26,7 @@ app.use("/api/user",UserRouter)
 app.use("/api/workout", WorkoutRouter)
 app.use("/api/meal",MealRouter)
 app.use("/api/exercises",ExercisesRouter)
+app.use("/api/progress",ProgressRoute)
 app.use('/public', express.static(path.join(__dirname, '../public')));
 
 const PORT = 3000 || 5000

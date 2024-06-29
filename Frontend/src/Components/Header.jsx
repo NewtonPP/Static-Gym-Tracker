@@ -4,18 +4,19 @@ import { IoAddSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { MdHistory } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
+import { GiProgression } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loading from "./Loading";
 
 const Header = () => {
     const [isLoading, setisLoading] = useState(false);
-    const { authUser } = useAuthContext();
+    const { authUser, setAuthUser } = useAuthContext();
     const navigate = useNavigate();
-    
-    const handleNavigation = async (path) => {
+    const PrevUser = localStorage.getItem("Id")
+    const handleNavigation =(path) => {
         setisLoading(true);
-        await navigate(path);
+        navigate(path);
         setisLoading(false);
     };
 
@@ -35,6 +36,9 @@ const Header = () => {
     const handleExercisesClick = () => {
         handleNavigation("/exercises");
     };
+    const handleProgressClick=()=>{
+        handleNavigation("/progress")
+    }
 
     const handleAddExerciseClick = () => {
         handleNavigation("/addexercise");
@@ -43,8 +47,10 @@ const Header = () => {
     const handleLogoutClick = () => {
         localStorage.removeItem("User");
         localStorage.removeItem("Id");
+        setAuthUser(null)
         handleNavigation("/");
     };
+
 
     return (
         <>
@@ -84,6 +90,15 @@ const Header = () => {
                             <FaDumbbell className="text-2xl mb-1" />
                             <span className="text-sm font-medium">Exercises</span>
                         </div>
+                        
+                        <div
+                            className="header-item h-full w-[120px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+                            onClick={handleProgressClick}
+                        >
+                            <GiProgression className="text-2xl mb-1" />
+                            <span className="text-sm font-medium">Progress</span>
+                        </div>
+                        
                         {authUser.UserType === "ADMIN" && (
                             <div
                                 className="header-item h-full w-[140px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"
