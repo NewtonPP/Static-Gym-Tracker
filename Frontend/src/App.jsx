@@ -20,13 +20,13 @@ import Questions from './Page/Questions';
 import ProtectedRoute from './Components/ProtectedRoute'; // Make sure the path is correct
 import ProgressChart from './Page/ProgressChart';
 import Journal from './Page/Journal';
+import AI from './Page/AI';
 
 function App() {
   const { authUser } = useAuthContext();
 
   return (
-    <>
-    
+    <>  
       <Router>
         <Routes>
           <Route path='/' element={authUser ? <HomePage /> : <GetStarted />} />
@@ -44,6 +44,7 @@ function App() {
           <Route path='/questions' element={authUser ? <Questions /> : <ErrorPage />} />
           <Route path='/progress' element={authUser ? <ProgressChart/> : <ErrorPage />} />
           <Route path='/journal' element={authUser ? <Journal/> : <ErrorPage />} />
+          <Route path='/askai' element={authUser ? <AI/> : <ErrorPage />} />
         </Routes>
       </Router>
     </>

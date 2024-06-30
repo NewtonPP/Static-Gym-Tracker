@@ -6,6 +6,7 @@ import { MdHistory } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { BsJournalText } from "react-icons/bs";
+import { MdQuestionAnswer } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loading from "./Loading";
@@ -42,6 +43,9 @@ const Header = () => {
     }
     const handleJournalClick=()=>{
         handleNavigation("/journal")
+    }
+    const handleAiClick=()=>{
+        handleNavigation("/askai")
     }
     const handleAddExerciseClick = () => {
         handleNavigation("/addexercise");
@@ -110,6 +114,14 @@ const Header = () => {
                             <span className="text-sm font-medium">Journal</span>
                         </div>
 
+                        <div
+                            className="header-item h-full w-[120px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+                            onClick={handleAiClick}
+                        >
+                            <MdQuestionAnswer className="text-2xl mb-1" />
+                            <span className="text-sm font-medium">Ask with AI</span>
+                        </div>
+                        
                         {authUser.UserType === "ADMIN" && (
                             <div
                                 className="header-item h-full w-[140px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"

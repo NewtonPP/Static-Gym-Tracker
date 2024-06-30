@@ -15,7 +15,6 @@ const Journal = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
         setJournal(response.data);
       });
     };
