@@ -56,7 +56,6 @@ const SignUp = () => {
         navigate(`/profile/${response.data._id}`);
       })
       .catch((error) => {
-        console.error("Error response:", error.response);
         setErrorMessage(error.response.data.message);
         setIsLoading(false);
       });

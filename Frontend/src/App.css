@@ -13,3 +13,12 @@
     animation: fadeIn 1s ease-in-out;
   }
   
+
+  /* styles.css */
+.JournalPage {
+  background: linear-gradient(to right, #f7fafc, #e2e8f0); /* Light gray gradient */
+}
+
+.journal-entry {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}

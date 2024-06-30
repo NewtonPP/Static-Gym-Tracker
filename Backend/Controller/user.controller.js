@@ -70,6 +70,18 @@ export const Login = async (req,res)=>{
     }
 }
 
+export const ChangeEmail = async(req,res)=>{
+    try {
+        const {Email, newEmail} = req.body;
+        const isUser = await UserModel.findOneAndUpdate({Email},{Email:newEmail},{new:true})
+        return res.status(200).json(isUser)
+    } catch (error) {
+        res.status(500).json({error:"Internal Server Error"})
+        console.log("Error in the ChangeEmail controller",error)
+    }
+}
+
+
 export const getUser =async(req,res)=>{
     try {
         const {id} = req.params;
@@ -98,9 +110,9 @@ export const deleteUser=async(req,res)=>{
 
 export const updateUser=async(req,res)=>{
     try {
-        const {Email} = req.body;
+        const {id} = req.params;
         const Data = req.body;
-        const User = await UserModel.findOneAndUpdate({Email},Data,{new:true})
+        const User = await UserModel.findByIdAndUpdate(id,Data,{new:true})
         return res.status(200).json(User)
     } catch (error) {
         res.status(500).json({error:"Internal Server Error"})

@@ -26,7 +26,10 @@ const ExercisePage = () => {
   }, []);
 
   const HandlePenClick=(id)=>{
+    const User = JSON.parse(localStorage.getItem("User"))
+    if(User.UserType==="ADMIN"){
     Navigate(`/editexercise/${id}`)
+    }
   }
   return (
     <>

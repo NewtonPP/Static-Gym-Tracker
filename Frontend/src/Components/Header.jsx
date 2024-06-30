@@ -5,6 +5,7 @@ import { IoMdLogOut } from "react-icons/io";
 import { MdHistory } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
+import { BsJournalText } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loading from "./Loading";
@@ -39,7 +40,9 @@ const Header = () => {
     const handleProgressClick=()=>{
         handleNavigation("/progress")
     }
-
+    const handleJournalClick=()=>{
+        handleNavigation("/journal")
+    }
     const handleAddExerciseClick = () => {
         handleNavigation("/addexercise");
     };
@@ -99,6 +102,14 @@ const Header = () => {
                             <span className="text-sm font-medium">Progress</span>
                         </div>
                         
+                        <div
+                            className="header-item h-full w-[120px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+                            onClick={handleJournalClick}
+                        >
+                            <BsJournalText className="text-2xl mb-1" />
+                            <span className="text-sm font-medium">Journal</span>
+                        </div>
+
                         {authUser.UserType === "ADMIN" && (
                             <div
                                 className="header-item h-full w-[140px] flex flex-col items-center justify-center text-center hover:scale-110 transition-transform duration-300 cursor-pointer"

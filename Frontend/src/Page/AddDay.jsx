@@ -9,6 +9,11 @@ const AddDay = () => {
   const [isLoading, setisLoading] = useState(false);
   const UserId = localStorage.getItem("Id");
   const [workoutName, setWorkoutName] = useState("");
+  const [Journal, setJournal ] = useState({
+    User:UserId,
+    Date:new Date().toLocaleDateString(),
+    Day:""
+  })
   const [date, setDate] = useState(new Date());
   const [exercises, setExercises] = useState([{ name: "", sets: "", reps: "" }]);
   const [exerciseFields, setExerciseFields] = useState(1); // Tracks number of exercise fields
@@ -16,6 +21,14 @@ const AddDay = () => {
   const [mealFields, setMealFields] = useState(1); // Tracks number of meal fields
 
 
+  const handleDoneClick=()=>{
+    axios.post("http://localhost:3000/api/journal/addday",Journal,{
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+    .then((response)=>{console.log(response.data)})
+  }
   const handleExerciseChange = (index, event) => {
     const { name, value } = event.target;
     const newExercises = [...exercises];
@@ -115,8 +128,8 @@ const AddDay = () => {
           </div>
           <div className="Question flex flex-col items-center mb-10">
             <h1 className="text-[25px] font-[700] mb-4">Hi, how was your day?</h1>
-            <input type="text" className="bg-gray-200 outline-none h-[40px] w-[80%] max-w-[500px] px-2 mb-4 rounded-md" placeholder="Describe your day..." />
-            <button type="submit" className="bg-blue-500 text-white h-[40px] w-[100px] hover:bg-blue-600 rounded-md">Done</button>
+            <input type="text" className="bg-gray-200 outline-none h-[40px] w-[80%] max-w-[500px] px-2 mb-4 rounded-md" placeholder="Describe your day..." onChange={(e)=>{setJournal({...Journal,Day:e.target.value})}}/>
+            <button type="submit" className="bg-blue-500 text-white h-[40px] w-[100px] hover:bg-blue-600 rounded-md" onClick={handleDoneClick}>Done</button>
           </div>
 
           <div className="AddExercise flex flex-col items-center mb-10">
